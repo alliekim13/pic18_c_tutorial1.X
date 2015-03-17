@@ -29,7 +29,7 @@
 /******************************************************************************/
 /* User Global Variable Declaration                                           */
 /******************************************************************************/
-int direction;
+int direction;          // Determines mouse direction
 static int forward=0;
 static int backward=1;
 static int right=2;
