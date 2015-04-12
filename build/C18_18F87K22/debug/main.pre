@@ -5134,55 +5134,125 @@ void ConfigureOscillator(void);
 void InitApp(void);
 
 # 32 "main.c"
-int direction;
-static int forward=0;
-static int backward=1;
-static int right=2;
-static int left=3;
+uint8_t lmotorstephigh;
+uint8_t lmotorsteplow;
+uint8_t rmotorstephigh;
+uint8_t rmotorsteplow;
+unsigned int adc;
+int lstep;
+int rstep;
+int rstepcount;
+int lstepcount;
+int lturn;
+int lturncount;
+unsigned int ustep;
+unsigned int rightturnstep;
+unsigned int leftturnstep;
+unsigned int rightstep;
+unsigned int forward;
+unsigned int right;
+unsigned int left;
+unsigned int uturn;
+unsigned int has_left_wall;
+unsigned int has_right_wall;
+unsigned int has_front_wall;
+unsigned int step_count;
+unsigned int prev_adc;
 
-# 43
+# 62
+void high_priority interrupt high_isr(void);
+
+
 uint16_t adc_convert(uint8_t channel)
-{
+{ prev_adc = adc;
 ADCON0bits.CHS = channel;
 ADCON0bits.GO = 0b1;
 while(ADCON0bits.DONE);
 return (ADRESH<<8)|ADRESL;
 }
 
+
+void delay(unsigned int ms)
+{ for(int i = 0; i < ms; i++)
+_delay((unsigned long)((1)*(32000000/4000.0)));
+}
+
+
+
 void main(void)
-{ int delay_time = 1000;
+{
 
 OSCCON = 0b01111100;
 
 OSCTUNE = 0b01001111;
 
-# 64
+ConfigureOscillator();
+
+# 94
 TRISA = 0b00000001;
-TRISC = 0x00;
-TRISB = 0x08;
+TRISC = 0b00000000;
+TRISB = 0b00000000;
 TRISD = 0b00000000;
 
 
 
 
-ADCON0bits.CHS = 0b0001;
-ADCON1bits.VCFG = 0b00;
-ADCON0bits.ADON = 1;
+LATC = 0b00000000;
+
+lstep = 1;
+rstep = 1;
+leftturnstep = 1;
+ustep = 1;
+forward = 0;
+lturn = 1;
+rstepcount = 0;
+lstepcount = 0;
+lturncount = 0;
+
+
+ADCON0bits.CHS = 0b0000;
 ADCON0bits.GO = 0;
-ADCON1bits.PCFG = 0b1110;
+ADCON1bits.VCFG = 0b00;
+ADCON1bits.PCFG = 0b1100;
 ADCON2bits.ADFM = 1;
 ADCON2bits.ACQT = 0b010;
 ADCON2bits.ADCS = 0b010;
-unsigned int adc;
-int sample = 0;
+ADCON0bits.ADON = 1;
 
-ADCON0bits.GO = 0;
-while (1)
+
+RCONbits.IPEN = 1;
+INTCONbits.GIE = 1;
+INTCONbits.PEIE = 1;
+INTCONbits.INT0IE = 0;
+INTCONbits.RBIE = 0;
+
+
+
+T3CONbits.TMR3ON = 0;
+T3CONbits.RD16 = 1;
+T3CONbits.T3CKPS1 = 0;
+T3CONbits.T3CKPS0 = 0;
+T3CONbits.TMR3CS = 0;
+PIR2bits.TMR3IF = 0;
+PIE2bits.TMR3IE = 1;
+
+
+T1CONbits.TMR1ON = 0;
+T1CONbits.RD16 = 1;
+T1CONbits.T1CKPS1 = 0;
+T1CONbits.T1CKPS0 = 0;
+T1CONbits.TMR1CS = 0;
+PIR1bits.TMR1IF = 0;
+PIE1bits.TMR1IE = 1;
+
+T1CONbits.TMR1ON = 1;
+T3CONbits.TMR3ON = 1;
+
+while(1)
 {
-while(ADCON0bits.DONE);
-adc = adc_convert(0);
+
+
 }
 
-# 136
 }
 

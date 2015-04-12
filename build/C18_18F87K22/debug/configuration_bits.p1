@@ -3679,7 +3679,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "80
 [p x LPT1OSC=OFF ]
 "81
-[p x MCLRE=ON ]
+[p x MCLRE=OFF ]
 "84
 [p x STVREN=ON ]
 "85

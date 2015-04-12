@@ -5128,58 +5128,185 @@ extern time_t mktime(struct tm *);
 extern size_t strftime(char *, size_t, const char *, const struct tm *) ;
 
 # 25 "interrupts.c"
-extern int direction;
-extern int forward;
-extern int backward;
-extern int right;
-extern int left;
+uint8_t lmotorstephigh;
+uint8_t lmotorsteplow;
+uint8_t rmotorstephigh;
+uint8_t rmotorsteplow;
+unsigned int adc;
+int lstep;
+int rstep;
+int rstepcount;
+int lstepcount;
+int lturn;
+int lturncount;
+unsigned int ustep;
+unsigned int rightturnstep;
+unsigned int leftturnstep;
+unsigned int rightstep;
+unsigned int forward;
+unsigned int right;
+unsigned int left;
+unsigned int uturn;
+unsigned int has_left_wall;
+unsigned int has_right_wall;
+unsigned int has_front_wall;
+unsigned int step_count;
+unsigned int prev_adc;
 
-# 44
-void interrupt high_isr(void)
+# 64
+void high_priority interrupt high_isr(void)
 {
-if (INTCONbits.INT0IF)
+
+if (PIR2bits.TMR3IF && forward && lstepcount < 500)
 {
-INTCONbits.INT0IF = 0;
+lmotorstephigh = 0b00111111;
+lmotorsteplow = 0b11110000;
 
-if ((PORTC & 0b00000001) == 1)
-LATC = 0b00000010;
-else if ((PORTC & 0b00000010) == 1)
-LATC = 0b00000100;
-else if ((PORTC & 0b00000100) == 1)
-LATC = 0b00001000;
-else if ((PORTC & 0b00001000) == 1)
-LATC = 0b00000001;
-else LATC = 0b00000001;
 
-TMR0L = 0b00000000;
-TMR0H = 0b00000000;
+if (lstep == 1)
+{ LATCbits.LATC3 = 0;
+LATCbits.LATC1 = 1;
+LATCbits.LATC0 = 0;
+LATCbits.LATC2 = 0;
+lstep++;
+}
+else if (lstep == 2)
+{ LATCbits.LATC3 = 1;
+LATCbits.LATC2 = 0;
+LATCbits.LATC0 = 0;
+LATCbits.LATC1 = 0;
+lstep++;
+}
+else if (lstep == 3)
+{ LATCbits.LATC3 = 0;
+LATCbits.LATC2 = 1;
+LATCbits.LATC1 = 0;
+LATCbits.LATC0 = 0;
+lstep++;
+}
+else if (lstep == 4)
+{ LATCbits.LATC2 = 0;
+LATCbits.LATC1 = 0;
+LATCbits.LATC0 = 1;
+LATCbits.LATC3 = 0;
+lstep = 1;
+lstepcount++;
 }
 
-if (PIR1bits.TMR1IF)
+
+PIR2bits.TMR3IF = 0;
+T3CONbits.TMR3ON = 1;
+
+TMR3H = lmotorstephigh;
+TMR3L = lmotorsteplow;
+}
+
+
+if (PIR1bits.TMR1IF && forward && rstepcount < 500)
 {
+rmotorstephigh = 0b00111111;
+rmotorsteplow = 0b11110000;
+
+
+if (rstep == 1)
+{ LATCbits.LATC6 = 0;
+LATCbits.LATC7 = 0;
+LATCbits.LATC4 = 1;
+LATCbits.LATC5 = 0;
+rstep++;
+}
+else if (rstep == 2)
+{ LATCbits.LATC4 = 0;
+LATCbits.LATC5 = 0;
+LATCbits.LATC7 = 1;
+LATCbits.LATC6 = 0;
+rstep++;
+}
+else if (rstep == 3)
+{ LATCbits.LATC4 = 0;
+LATCbits.LATC5 = 0;
+LATCbits.LATC6 = 1;
+LATCbits.LATC7 = 0;
+rstep++;
+}
+else if (rstep == 4)
+{ LATCbits.LATC5 = 1;
+LATCbits.LATC6 = 0;
+LATCbits.LATC7 = 0;
+LATCbits.LATC4 = 0;
+rstep = 1;
+rstepcount++;
+}
+
 PIR1bits.TMR1IF = 0;
+T1CONbits.TMR1ON = 1;
 
-if ((PORTC & 0b00010000) == 1)
-LATC = 0b00100000;
-else if ((PORTC & 0b00100000) == 1)
-LATC = 0b01000000;
-else if ((PORTC & 0b01000000) == 1)
-LATC = 0b10000000;
-else LATC = 0b00010000;
-
-TMR1L = 0b00000000;
-TMR1H = 0b00000000;
+TMR1H = rmotorstephigh;
+TMR1L = rmotorsteplow;
 }
 
-# 107
+
+if (PIR2bits.TMR3IF && lstepcount < 60 && lturn)
+{
+if (leftturnstep == 1)
+{ LATCbits.LATC0 = 1;
+LATCbits.LATC1 = 0;
+LATCbits.LATC2 = 0;
+LATCbits.LATC3 = 0;
+LATCbits.LATC4 = 1;
+LATCbits.LATC5 = 0;
+LATCbits.LATC6 = 0;
+LATCbits.LATC7 = 0;
+leftturnstep++;
 }
+else if (leftturnstep == 2)
+{ LATCbits.LATC0 = 0;
+LATCbits.LATC1 = 0;
+LATCbits.LATC2 = 1;
+LATCbits.LATC3 = 0;
+LATCbits.LATC4 = 0;
+LATCbits.LATC5 = 0;
+LATCbits.LATC6 = 0;
+LATCbits.LATC7 = 1;
+leftturnstep++;
+}
+else if (leftturnstep == 3)
+{ LATCbits.LATC0 = 0;
+LATCbits.LATC1 = 0;
+LATCbits.LATC2 = 0;
+LATCbits.LATC3 = 1;
+LATCbits.LATC4 = 0;
+LATCbits.LATC5 = 0;
+LATCbits.LATC6 = 1;
+LATCbits.LATC7 = 0;
+leftturnstep++;
+}
+else if (leftturnstep == 4)
+{ LATCbits.LATC0 = 0;
+LATCbits.LATC1 = 1;
+LATCbits.LATC2 = 0;
+LATCbits.LATC3 = 0;
+LATCbits.LATC4 = 0;
+LATCbits.LATC5 = 1;
+LATCbits.LATC6 = 0;
+LATCbits.LATC7 = 0;
+leftturnstep = 1;
+lturncount++;
+}
+PIR2bits.TMR3IF = 0;
+T3CONbits.TMR3ON = 1;
+TMR3H = rmotorstephigh;
+TMR3L = rmotorsteplow;
+}
+}
+
 
 
 
 void low_priority interrupt low_isr(void)
 
-# 119
+# 221
 {
 
-# 146
+# 248
 }

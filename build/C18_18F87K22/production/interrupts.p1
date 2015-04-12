@@ -1,32 +1,74 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"6634 /Applications/microchip/xc8/v1.33/include/pic18f4620.h
-[s S346 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S346 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
-"6644
-[s S347 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S347 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE GIE ]
-"6654
-[s S348 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S348 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE GIEL GIEH ]
-"6664
-[s S349 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S349 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
-"6674
-[s S350 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S350 . . GIEL GIEH ]
-"6633
-[u S345 `S346 1 `S347 1 `S348 1 `S349 1 `S350 1 ]
-[n S345 . . . . . . ]
-"6680
-[v _INTCONbits `VS345 ~T0 @X0 0 e@4082 ]
-"355
-[v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
-"1265
-[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
-"6217
-[v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
-"6223
-[v _TMR0H `Vuc ~T0 @X0 0 e@4055 ]
+"3050 /Applications/microchip/xc8/v1.33/include/pic18f4620.h
+[s S156 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S156 . CCP2IF TMR3IF HLVDIF BCLIF EEIF . CMIF OSCFIF ]
+"3060
+[s S157 :2 `uc 1 :1 `uc 1 ]
+[n S157 . . LVDIF ]
+"3049
+[u S155 `S156 1 `S157 1 ]
+[n S155 . . . ]
+"3065
+[v _PIR2bits `VS155 ~T0 @X0 0 e@4001 ]
+"1271
+[s S78 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S78 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 LATC6 LATC7 ]
+"1281
+[s S79 :1 `uc 1 ]
+[n S79 . LC0 ]
+"1284
+[s S80 :1 `uc 1 :1 `uc 1 ]
+[n S80 . . LC1 ]
+"1288
+[s S81 :2 `uc 1 :1 `uc 1 ]
+[n S81 . . LC2 ]
+"1292
+[s S82 :3 `uc 1 :1 `uc 1 ]
+[n S82 . . LC3 ]
+"1296
+[s S83 :4 `uc 1 :1 `uc 1 ]
+[n S83 . . LC4 ]
+"1300
+[s S84 :5 `uc 1 :1 `uc 1 ]
+[n S84 . . LC5 ]
+"1304
+[s S85 :6 `uc 1 :1 `uc 1 ]
+[n S85 . . LC6 ]
+"1308
+[s S86 :7 `uc 1 :1 `uc 1 ]
+[n S86 . . LC7 ]
+"1270
+[u S77 `S78 1 `S79 1 `S80 1 `S81 1 `S82 1 `S83 1 `S84 1 `S85 1 `S86 1 ]
+[n S77 . . . . . . . . . . ]
+"1313
+[v _LATCbits `VS77 ~T0 @X0 0 e@3979 ]
+"3814
+[s S203 :2 `uc 1 :1 `uc 1 ]
+[n S203 . . NOT_T3SYNC ]
+"3818
+[s S204 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S204 . TMR3ON TMR3CS nT3SYNC T3CCP1 T3CKPS T3CCP2 RD16 ]
+"3827
+[s S205 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S205 . . T3SYNC . T3CKPS0 T3CKPS1 ]
+"3834
+[s S206 :7 `uc 1 :1 `uc 1 ]
+[n S206 . . RD163 ]
+"3838
+[s S207 :3 `uc 1 :1 `uc 1 ]
+[n S207 . . SOSCEN3 ]
+"3842
+[s S208 :7 `uc 1 :1 `uc 1 ]
+[n S208 . . T3RD16 ]
+"3813
+[u S202 `S203 1 `S204 1 `S205 1 `S206 1 `S207 1 `S208 1 ]
+[n S202 . . . . . . . ]
+"3847
+[v _T3CONbits `VS202 ~T0 @X0 0 e@4017 ]
+"3933
+[v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
+"3927
+[v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
 "2827
 [s S145 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S145 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF PSPIF ]
@@ -41,10 +83,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S144 . . . . ]
 "2846
 [v _PIR1bits `VS144 ~T0 @X0 0 e@3998 ]
-"5619
-[v _TMR1L `Vuc ~T0 @X0 0 e@4046 ]
+"5515
+[s S300 :2 `uc 1 :1 `uc 1 ]
+[n S300 . . NOT_T1SYNC ]
+"5519
+[s S301 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S301 . TMR1ON TMR1CS nT1SYNC T1OSCEN T1CKPS T1RUN RD16 ]
+"5528
+[s S302 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S302 . . T1SYNC . T1CKPS0 T1CKPS1 ]
+"5535
+[s S303 :3 `uc 1 :1 `uc 1 ]
+[n S303 . . SOSCEN ]
+"5539
+[s S304 :7 `uc 1 :1 `uc 1 ]
+[n S304 . . T1RD16 ]
+"5514
+[u S299 `S300 1 `S301 1 `S302 1 `S303 1 `S304 1 ]
+[n S299 . . . . . . ]
+"5544
+[v _T1CONbits `VS299 ~T0 @X0 0 e@4045 ]
 "5625
 [v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
+"5619
+[v _TMR1L `Vuc ~T0 @X0 0 e@4046 ]
 [; ;htc.h: 21: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 24: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4620.h: 47: extern volatile unsigned char PORTA @ 0xF80;
@@ -3833,141 +3895,530 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;time.h: 40: extern struct tm * localtime(const time_t *);
 [; ;time.h: 41: extern time_t mktime(struct tm *);
 [; ;time.h: 48: extern size_t strftime(char *, size_t, const char *, const struct tm *) ;
-[; ;interrupts.c: 25: extern int direction;
-[; ;interrupts.c: 26: extern int forward;
-[; ;interrupts.c: 27: extern int backward;
-[; ;interrupts.c: 28: extern int right;
-[; ;interrupts.c: 29: extern int left;
-[v F4276 `(v ~T0 @X0 1 tf ]
-"44 interrupts.c
-[v _high_isr `IF4276 ~T0 @X0 1 e ]
+"25 interrupts.c
+[v _lmotorstephigh `uc ~T0 @X0 1 e ]
+[; ;interrupts.c: 25: uint8_t lmotorstephigh;
+"26
+[v _lmotorsteplow `uc ~T0 @X0 1 e ]
+[; ;interrupts.c: 26: uint8_t lmotorsteplow;
+"27
+[v _rmotorstephigh `uc ~T0 @X0 1 e ]
+[; ;interrupts.c: 27: uint8_t rmotorstephigh;
+"28
+[v _rmotorsteplow `uc ~T0 @X0 1 e ]
+[; ;interrupts.c: 28: uint8_t rmotorsteplow;
+"29
+[v _adc `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 29: unsigned int adc;
+"30
+[v _lstep `i ~T0 @X0 1 e ]
+[; ;interrupts.c: 30: int lstep;
+"31
+[v _rstep `i ~T0 @X0 1 e ]
+[; ;interrupts.c: 31: int rstep;
+"32
+[v _rstepcount `i ~T0 @X0 1 e ]
+[; ;interrupts.c: 32: int rstepcount;
+"33
+[v _lstepcount `i ~T0 @X0 1 e ]
+[; ;interrupts.c: 33: int lstepcount;
+"34
+[v _lturn `i ~T0 @X0 1 e ]
+[; ;interrupts.c: 34: int lturn;
+"35
+[v _lturncount `i ~T0 @X0 1 e ]
+[; ;interrupts.c: 35: int lturncount;
+"36
+[v _ustep `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 36: unsigned int ustep;
+"37
+[v _rightturnstep `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 37: unsigned int rightturnstep;
+"38
+[v _leftturnstep `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 38: unsigned int leftturnstep;
+"39
+[v _rightstep `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 39: unsigned int rightstep;
+"40
+[v _forward `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 40: unsigned int forward;
+"41
+[v _right `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 41: unsigned int right;
+"42
+[v _left `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 42: unsigned int left;
+"43
+[v _uturn `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 43: unsigned int uturn;
+"44
+[v _has_left_wall `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 44: unsigned int has_left_wall;
 "45
+[v _has_right_wall `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 45: unsigned int has_right_wall;
+"46
+[v _has_front_wall `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 46: unsigned int has_front_wall;
+"47
+[v _step_count `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 47: unsigned int step_count;
+"48
+[v _prev_adc `ui ~T0 @X0 1 e ]
+[; ;interrupts.c: 48: unsigned int prev_adc;
+[v F4295 `(v ~T0 @X0 1 tf ]
+"64
+[v _high_isr `IHF4295 ~T0 @X0 1 e ]
+"65
 {
-[; ;interrupts.c: 44: void interrupt high_isr(void)
-[; ;interrupts.c: 45: {
+[; ;interrupts.c: 64: void high_priority interrupt high_isr(void)
+[; ;interrupts.c: 65: {
 [e :U _high_isr ]
 [f ]
-[; ;interrupts.c: 46: if (INTCONbits.INT0IF)
-"46
-[e $ ! != -> . . _INTCONbits 0 1 `i -> -> -> 0 `i `Vuc `i 398  ]
-[; ;interrupts.c: 47: {
-"47
+[; ;interrupts.c: 67: if (PIR2bits.TMR3IF && forward && lstepcount < 500)
+"67
+[e $ ! && && != -> . . _PIR2bits 0 1 `i -> -> -> 0 `i `Vuc `i != _forward -> -> 0 `i `ui < _lstepcount -> 500 `i 398  ]
+[; ;interrupts.c: 68: {
+"68
 {
-[; ;interrupts.c: 48: INTCONbits.INT0IF = 0;
-"48
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-[; ;interrupts.c: 50: if ((PORTC & 0b00000001) == 1)
-"50
-[e $ ! == & -> _PORTC `i -> 1 `i -> 1 `i 399  ]
-[; ;interrupts.c: 51: LATC = 0b00000010;
-"51
-[e = _LATC -> -> 2 `i `uc ]
+[; ;interrupts.c: 69: lmotorstephigh = 0b00111111;
+"69
+[e = _lmotorstephigh -> -> 63 `i `uc ]
+[; ;interrupts.c: 70: lmotorsteplow = 0b11110000;
+"70
+[e = _lmotorsteplow -> -> 240 `i `uc ]
+[; ;interrupts.c: 73: if (lstep == 1)
+"73
+[e $ ! == _lstep -> 1 `i 399  ]
+[; ;interrupts.c: 74: { LATCbits.LATC3 = 0;
+"74
+{
+[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
+[; ;interrupts.c: 75: LATCbits.LATC1 = 1;
+"75
+[e = . . _LATCbits 0 1 -> -> 1 `i `uc ]
+[; ;interrupts.c: 76: LATCbits.LATC0 = 0;
+"76
+[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 77: LATCbits.LATC2 = 0;
+"77
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 78: lstep++;
+"78
+[e ++ _lstep -> 1 `i ]
+"79
+}
+[; ;interrupts.c: 79: }
 [e $U 400  ]
-"52
+"80
 [e :U 399 ]
-[; ;interrupts.c: 52: else if ((PORTC & 0b00000010) == 1)
-[e $ ! == & -> _PORTC `i -> 2 `i -> 1 `i 401  ]
-[; ;interrupts.c: 53: LATC = 0b00000100;
-"53
-[e = _LATC -> -> 4 `i `uc ]
+[; ;interrupts.c: 80: else if (lstep == 2)
+[e $ ! == _lstep -> 2 `i 401  ]
+[; ;interrupts.c: 81: { LATCbits.LATC3 = 1;
+"81
+{
+[e = . . _LATCbits 0 3 -> -> 1 `i `uc ]
+[; ;interrupts.c: 82: LATCbits.LATC2 = 0;
+"82
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 83: LATCbits.LATC0 = 0;
+"83
+[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 84: LATCbits.LATC1 = 0;
+"84
+[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 85: lstep++;
+"85
+[e ++ _lstep -> 1 `i ]
+"86
+}
+[; ;interrupts.c: 86: }
 [e $U 402  ]
-"54
+"87
 [e :U 401 ]
-[; ;interrupts.c: 54: else if ((PORTC & 0b00000100) == 1)
-[e $ ! == & -> _PORTC `i -> 4 `i -> 1 `i 403  ]
-[; ;interrupts.c: 55: LATC = 0b00001000;
-"55
-[e = _LATC -> -> 8 `i `uc ]
+[; ;interrupts.c: 87: else if (lstep == 3)
+[e $ ! == _lstep -> 3 `i 403  ]
+[; ;interrupts.c: 88: { LATCbits.LATC3 = 0;
+"88
+{
+[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
+[; ;interrupts.c: 89: LATCbits.LATC2 = 1;
+"89
+[e = . . _LATCbits 0 2 -> -> 1 `i `uc ]
+[; ;interrupts.c: 90: LATCbits.LATC1 = 0;
+"90
+[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 91: LATCbits.LATC0 = 0;
+"91
+[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 92: lstep++;
+"92
+[e ++ _lstep -> 1 `i ]
+"93
+}
+[; ;interrupts.c: 93: }
 [e $U 404  ]
-"56
+"94
 [e :U 403 ]
-[; ;interrupts.c: 56: else if ((PORTC & 0b00001000) == 1)
-[e $ ! == & -> _PORTC `i -> 8 `i -> 1 `i 405  ]
-[; ;interrupts.c: 57: LATC = 0b00000001;
-"57
-[e = _LATC -> -> 1 `i `uc ]
-[e $U 406  ]
-"58
+[; ;interrupts.c: 94: else if (lstep == 4)
+[e $ ! == _lstep -> 4 `i 405  ]
+[; ;interrupts.c: 95: { LATCbits.LATC2 = 0;
+"95
+{
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 96: LATCbits.LATC1 = 0;
+"96
+[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 97: LATCbits.LATC0 = 1;
+"97
+[e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
+[; ;interrupts.c: 98: LATCbits.LATC3 = 0;
+"98
+[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
+[; ;interrupts.c: 99: lstep = 1;
+"99
+[e = _lstep -> 1 `i ]
+[; ;interrupts.c: 100: lstepcount++;
+"100
+[e ++ _lstepcount -> 1 `i ]
+"101
+}
 [e :U 405 ]
-[; ;interrupts.c: 58: else LATC = 0b00000001;
-[e = _LATC -> -> 1 `i `uc ]
-[e :U 406 ]
+"104
 [e :U 404 ]
 [e :U 402 ]
 [e :U 400 ]
-[; ;interrupts.c: 60: TMR0L = 0b00000000;
-"60
-[e = _TMR0L -> -> 0 `i `uc ]
-[; ;interrupts.c: 61: TMR0H = 0b00000000;
-"61
-[e = _TMR0H -> -> 0 `i `uc ]
-"62
+[; ;interrupts.c: 101: }
+[; ;interrupts.c: 104: PIR2bits.TMR3IF = 0;
+[e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 105: T3CONbits.TMR3ON = 1;
+"105
+[e = . . _T3CONbits 1 0 -> -> 1 `i `uc ]
+[; ;interrupts.c: 107: TMR3H = lmotorstephigh;
+"107
+[e = _TMR3H _lmotorstephigh ]
+[; ;interrupts.c: 108: TMR3L = lmotorsteplow;
+"108
+[e = _TMR3L _lmotorsteplow ]
+"109
 }
 [e :U 398 ]
-[; ;interrupts.c: 62: }
-[; ;interrupts.c: 64: if (PIR1bits.TMR1IF)
-"64
-[e $ ! != -> . . _PIR1bits 0 0 `i -> -> -> 0 `i `Vuc `i 407  ]
-[; ;interrupts.c: 65: {
-"65
+[; ;interrupts.c: 109: }
+[; ;interrupts.c: 112: if (PIR1bits.TMR1IF && forward && rstepcount < 500)
+"112
+[e $ ! && && != -> . . _PIR1bits 0 0 `i -> -> -> 0 `i `Vuc `i != _forward -> -> 0 `i `ui < _rstepcount -> 500 `i 406  ]
+[; ;interrupts.c: 113: {
+"113
 {
-[; ;interrupts.c: 66: PIR1bits.TMR1IF = 0;
-"66
-[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-[; ;interrupts.c: 68: if ((PORTC & 0b00010000) == 1)
-"68
-[e $ ! == & -> _PORTC `i -> 16 `i -> 1 `i 408  ]
-[; ;interrupts.c: 69: LATC = 0b00100000;
-"69
-[e = _LATC -> -> 32 `i `uc ]
-[e $U 409  ]
-"70
-[e :U 408 ]
-[; ;interrupts.c: 70: else if ((PORTC & 0b00100000) == 1)
-[e $ ! == & -> _PORTC `i -> 32 `i -> 1 `i 410  ]
-[; ;interrupts.c: 71: LATC = 0b01000000;
-"71
-[e = _LATC -> -> 64 `i `uc ]
-[e $U 411  ]
-"72
-[e :U 410 ]
-[; ;interrupts.c: 72: else if ((PORTC & 0b01000000) == 1)
-[e $ ! == & -> _PORTC `i -> 64 `i -> 1 `i 412  ]
-[; ;interrupts.c: 73: LATC = 0b10000000;
-"73
-[e = _LATC -> -> 128 `i `uc ]
-[e $U 413  ]
-"74
-[e :U 412 ]
-[; ;interrupts.c: 74: else LATC = 0b00010000;
-[e = _LATC -> -> 16 `i `uc ]
-[e :U 413 ]
-[e :U 411 ]
-[e :U 409 ]
-[; ;interrupts.c: 76: TMR1L = 0b00000000;
-"76
-[e = _TMR1L -> -> 0 `i `uc ]
-[; ;interrupts.c: 77: TMR1H = 0b00000000;
-"77
-[e = _TMR1H -> -> 0 `i `uc ]
-"78
-}
-[e :U 407 ]
-[; ;interrupts.c: 78: }
-[; ;interrupts.c: 107: }
-"107
-[e :UE 397 ]
-}
-[v F4279 `(v ~T0 @X0 1 tf ]
-"111
-[v _low_isr `ILF4279 ~T0 @X0 1 e ]
+[; ;interrupts.c: 114: rmotorstephigh = 0b00111111;
+"114
+[e = _rmotorstephigh -> -> 63 `i `uc ]
+[; ;interrupts.c: 115: rmotorsteplow = 0b11110000;
+"115
+[e = _rmotorsteplow -> -> 240 `i `uc ]
+[; ;interrupts.c: 118: if (rstep == 1)
+"118
+[e $ ! == _rstep -> 1 `i 407  ]
+[; ;interrupts.c: 119: { LATCbits.LATC6 = 0;
 "119
 {
-[; ;interrupts.c: 111: void low_priority interrupt low_isr(void)
-[; ;interrupts.c: 119: {
+[e = . . _LATCbits 0 6 -> -> 0 `i `uc ]
+[; ;interrupts.c: 120: LATCbits.LATC7 = 0;
+"120
+[e = . . _LATCbits 0 7 -> -> 0 `i `uc ]
+[; ;interrupts.c: 121: LATCbits.LATC4 = 1;
+"121
+[e = . . _LATCbits 0 4 -> -> 1 `i `uc ]
+[; ;interrupts.c: 122: LATCbits.LATC5 = 0;
+"122
+[e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 123: rstep++;
+"123
+[e ++ _rstep -> 1 `i ]
+"124
+}
+[; ;interrupts.c: 124: }
+[e $U 408  ]
+"125
+[e :U 407 ]
+[; ;interrupts.c: 125: else if (rstep == 2)
+[e $ ! == _rstep -> 2 `i 409  ]
+[; ;interrupts.c: 126: { LATCbits.LATC4 = 0;
+"126
+{
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+[; ;interrupts.c: 127: LATCbits.LATC5 = 0;
+"127
+[e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 128: LATCbits.LATC7 = 1;
+"128
+[e = . . _LATCbits 0 7 -> -> 1 `i `uc ]
+[; ;interrupts.c: 129: LATCbits.LATC6 = 0;
+"129
+[e = . . _LATCbits 0 6 -> -> 0 `i `uc ]
+[; ;interrupts.c: 130: rstep++;
+"130
+[e ++ _rstep -> 1 `i ]
+"131
+}
+[; ;interrupts.c: 131: }
+[e $U 410  ]
+"132
+[e :U 409 ]
+[; ;interrupts.c: 132: else if (rstep == 3)
+[e $ ! == _rstep -> 3 `i 411  ]
+[; ;interrupts.c: 133: { LATCbits.LATC4 = 0;
+"133
+{
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+[; ;interrupts.c: 134: LATCbits.LATC5 = 0;
+"134
+[e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 135: LATCbits.LATC6 = 1;
+"135
+[e = . . _LATCbits 0 6 -> -> 1 `i `uc ]
+[; ;interrupts.c: 136: LATCbits.LATC7 = 0;
+"136
+[e = . . _LATCbits 0 7 -> -> 0 `i `uc ]
+[; ;interrupts.c: 137: rstep++;
+"137
+[e ++ _rstep -> 1 `i ]
+"138
+}
+[; ;interrupts.c: 138: }
+[e $U 412  ]
+"139
+[e :U 411 ]
+[; ;interrupts.c: 139: else if (rstep == 4)
+[e $ ! == _rstep -> 4 `i 413  ]
+[; ;interrupts.c: 140: { LATCbits.LATC5 = 1;
+"140
+{
+[e = . . _LATCbits 0 5 -> -> 1 `i `uc ]
+[; ;interrupts.c: 141: LATCbits.LATC6 = 0;
+"141
+[e = . . _LATCbits 0 6 -> -> 0 `i `uc ]
+[; ;interrupts.c: 142: LATCbits.LATC7 = 0;
+"142
+[e = . . _LATCbits 0 7 -> -> 0 `i `uc ]
+[; ;interrupts.c: 143: LATCbits.LATC4 = 0;
+"143
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+[; ;interrupts.c: 144: rstep = 1;
+"144
+[e = _rstep -> 1 `i ]
+[; ;interrupts.c: 145: rstepcount++;
+"145
+[e ++ _rstepcount -> 1 `i ]
+"146
+}
+[e :U 413 ]
+"148
+[e :U 412 ]
+[e :U 410 ]
+[e :U 408 ]
+[; ;interrupts.c: 146: }
+[; ;interrupts.c: 148: PIR1bits.TMR1IF = 0;
+[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 149: T1CONbits.TMR1ON = 1;
+"149
+[e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
+[; ;interrupts.c: 151: TMR1H = rmotorstephigh;
+"151
+[e = _TMR1H _rmotorstephigh ]
+[; ;interrupts.c: 152: TMR1L = rmotorsteplow;
+"152
+[e = _TMR1L _rmotorsteplow ]
+"153
+}
+[e :U 406 ]
+[; ;interrupts.c: 153: }
+[; ;interrupts.c: 156: if (PIR2bits.TMR3IF && lstepcount < 60 && lturn)
+"156
+[e $ ! && && != -> . . _PIR2bits 0 1 `i -> -> -> 0 `i `Vuc `i < _lstepcount -> 60 `i != _lturn -> 0 `i 414  ]
+[; ;interrupts.c: 157: {
+"157
+{
+[; ;interrupts.c: 158: if (leftturnstep == 1)
+"158
+[e $ ! == _leftturnstep -> -> 1 `i `ui 415  ]
+[; ;interrupts.c: 159: { LATCbits.LATC0 = 1;
+"159
+{
+[e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
+[; ;interrupts.c: 160: LATCbits.LATC1 = 0;
+"160
+[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 161: LATCbits.LATC2 = 0;
+"161
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 162: LATCbits.LATC3 = 0;
+"162
+[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
+[; ;interrupts.c: 163: LATCbits.LATC4 = 1;
+"163
+[e = . . _LATCbits 0 4 -> -> 1 `i `uc ]
+[; ;interrupts.c: 164: LATCbits.LATC5 = 0;
+"164
+[e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 165: LATCbits.LATC6 = 0;
+"165
+[e = . . _LATCbits 0 6 -> -> 0 `i `uc ]
+[; ;interrupts.c: 166: LATCbits.LATC7 = 0;
+"166
+[e = . . _LATCbits 0 7 -> -> 0 `i `uc ]
+[; ;interrupts.c: 167: leftturnstep++;
+"167
+[e ++ _leftturnstep -> -> 1 `i `ui ]
+"168
+}
+[; ;interrupts.c: 168: }
+[e $U 416  ]
+"169
+[e :U 415 ]
+[; ;interrupts.c: 169: else if (leftturnstep == 2)
+[e $ ! == _leftturnstep -> -> 2 `i `ui 417  ]
+[; ;interrupts.c: 170: { LATCbits.LATC0 = 0;
+"170
+{
+[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 171: LATCbits.LATC1 = 0;
+"171
+[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 172: LATCbits.LATC2 = 1;
+"172
+[e = . . _LATCbits 0 2 -> -> 1 `i `uc ]
+[; ;interrupts.c: 173: LATCbits.LATC3 = 0;
+"173
+[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
+[; ;interrupts.c: 174: LATCbits.LATC4 = 0;
+"174
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+[; ;interrupts.c: 175: LATCbits.LATC5 = 0;
+"175
+[e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 176: LATCbits.LATC6 = 0;
+"176
+[e = . . _LATCbits 0 6 -> -> 0 `i `uc ]
+[; ;interrupts.c: 177: LATCbits.LATC7 = 1;
+"177
+[e = . . _LATCbits 0 7 -> -> 1 `i `uc ]
+[; ;interrupts.c: 178: leftturnstep++;
+"178
+[e ++ _leftturnstep -> -> 1 `i `ui ]
+"179
+}
+[; ;interrupts.c: 179: }
+[e $U 418  ]
+"180
+[e :U 417 ]
+[; ;interrupts.c: 180: else if (leftturnstep == 3)
+[e $ ! == _leftturnstep -> -> 3 `i `ui 419  ]
+[; ;interrupts.c: 181: { LATCbits.LATC0 = 0;
+"181
+{
+[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 182: LATCbits.LATC1 = 0;
+"182
+[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 183: LATCbits.LATC2 = 0;
+"183
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 184: LATCbits.LATC3 = 1;
+"184
+[e = . . _LATCbits 0 3 -> -> 1 `i `uc ]
+[; ;interrupts.c: 185: LATCbits.LATC4 = 0;
+"185
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+[; ;interrupts.c: 186: LATCbits.LATC5 = 0;
+"186
+[e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 187: LATCbits.LATC6 = 1;
+"187
+[e = . . _LATCbits 0 6 -> -> 1 `i `uc ]
+[; ;interrupts.c: 188: LATCbits.LATC7 = 0;
+"188
+[e = . . _LATCbits 0 7 -> -> 0 `i `uc ]
+[; ;interrupts.c: 189: leftturnstep++;
+"189
+[e ++ _leftturnstep -> -> 1 `i `ui ]
+"190
+}
+[; ;interrupts.c: 190: }
+[e $U 420  ]
+"191
+[e :U 419 ]
+[; ;interrupts.c: 191: else if (leftturnstep == 4)
+[e $ ! == _leftturnstep -> -> 4 `i `ui 421  ]
+[; ;interrupts.c: 192: { LATCbits.LATC0 = 0;
+"192
+{
+[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 193: LATCbits.LATC1 = 1;
+"193
+[e = . . _LATCbits 0 1 -> -> 1 `i `uc ]
+[; ;interrupts.c: 194: LATCbits.LATC2 = 0;
+"194
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 195: LATCbits.LATC3 = 0;
+"195
+[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
+[; ;interrupts.c: 196: LATCbits.LATC4 = 0;
+"196
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+[; ;interrupts.c: 197: LATCbits.LATC5 = 1;
+"197
+[e = . . _LATCbits 0 5 -> -> 1 `i `uc ]
+[; ;interrupts.c: 198: LATCbits.LATC6 = 0;
+"198
+[e = . . _LATCbits 0 6 -> -> 0 `i `uc ]
+[; ;interrupts.c: 199: LATCbits.LATC7 = 0;
+"199
+[e = . . _LATCbits 0 7 -> -> 0 `i `uc ]
+[; ;interrupts.c: 200: leftturnstep = 1;
+"200
+[e = _leftturnstep -> -> 1 `i `ui ]
+[; ;interrupts.c: 201: lturncount++;
+"201
+[e ++ _lturncount -> 1 `i ]
+"202
+}
+[e :U 421 ]
+"203
+[e :U 420 ]
+[e :U 418 ]
+[e :U 416 ]
+[; ;interrupts.c: 202: }
+[; ;interrupts.c: 203: PIR2bits.TMR3IF = 0;
+[e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 204: T3CONbits.TMR3ON = 1;
+"204
+[e = . . _T3CONbits 1 0 -> -> 1 `i `uc ]
+[; ;interrupts.c: 205: TMR3H = rmotorstephigh;
+"205
+[e = _TMR3H _rmotorstephigh ]
+[; ;interrupts.c: 206: TMR3L = rmotorsteplow;
+"206
+[e = _TMR3L _rmotorsteplow ]
+"207
+}
+[e :U 414 ]
+[; ;interrupts.c: 207: }
+[; ;interrupts.c: 208: }
+"208
+[e :UE 397 ]
+}
+[v F4298 `(v ~T0 @X0 1 tf ]
+"213
+[v _low_isr `ILF4298 ~T0 @X0 1 e ]
+"221
+{
+[; ;interrupts.c: 213: void low_priority interrupt low_isr(void)
+[; ;interrupts.c: 221: {
 [e :U _low_isr ]
 [f ]
-[; ;interrupts.c: 146: }
-"146
-[e :UE 414 ]
+[; ;interrupts.c: 248: }
+"248
+[e :UE 422 ]
 }
