@@ -5132,7 +5132,9 @@ uint8_t lmotorstephigh;
 uint8_t lmotorsteplow;
 uint8_t rmotorstephigh;
 uint8_t rmotorsteplow;
-unsigned int adc;
+unsigned int leftadc;
+unsigned int rightadc;
+unsigned int middleadc;
 int lstep;
 int rstep;
 int rstepcount;
@@ -5153,14 +5155,12 @@ unsigned int has_front_wall;
 unsigned int step_count;
 unsigned int prev_adc;
 
-# 64
+# 66
 void high_priority interrupt high_isr(void)
 {
 
-if (PIR2bits.TMR3IF && forward && lstepcount < 500)
+if (PIR2bits.TMR3IF && forward && lstepcount < 1000)
 {
-lmotorstephigh = 0b00111111;
-lmotorsteplow = 0b11110000;
 
 
 if (lstep == 1)
@@ -5171,15 +5171,15 @@ LATCbits.LATC2 = 0;
 lstep++;
 }
 else if (lstep == 2)
-{ LATCbits.LATC3 = 1;
-LATCbits.LATC2 = 0;
+{ LATCbits.LATC3 = 0;
+LATCbits.LATC2 = 1;
 LATCbits.LATC0 = 0;
 LATCbits.LATC1 = 0;
 lstep++;
 }
 else if (lstep == 3)
-{ LATCbits.LATC3 = 0;
-LATCbits.LATC2 = 1;
+{ LATCbits.LATC3 = 1;
+LATCbits.LATC2 = 0;
 LATCbits.LATC1 = 0;
 LATCbits.LATC0 = 0;
 lstep++;
@@ -5202,10 +5202,9 @@ TMR3L = lmotorsteplow;
 }
 
 
-if (PIR1bits.TMR1IF && forward && rstepcount < 500)
+if (PIR1bits.TMR1IF && forward && rstepcount < 1000)
 {
-rmotorstephigh = 0b00111111;
-rmotorsteplow = 0b11110000;
+
 
 
 if (rstep == 1)
@@ -5246,7 +5245,7 @@ TMR1L = rmotorsteplow;
 }
 
 
-if (PIR1bits.TMR1IF && lstepcount < 60 && lturn)
+if (PIR2bits.TMR3IF && lturn && lturncount < uturn)
 {
 if (leftturnstep == 1)
 { LATCbits.LATC0 = 1;
@@ -5262,8 +5261,8 @@ leftturnstep++;
 else if (leftturnstep == 2)
 { LATCbits.LATC0 = 0;
 LATCbits.LATC1 = 0;
-LATCbits.LATC2 = 1;
-LATCbits.LATC3 = 0;
+LATCbits.LATC2 = 0;
+LATCbits.LATC3 = 1;
 LATCbits.LATC4 = 0;
 LATCbits.LATC5 = 0;
 LATCbits.LATC6 = 0;
@@ -5273,8 +5272,8 @@ leftturnstep++;
 else if (leftturnstep == 3)
 { LATCbits.LATC0 = 0;
 LATCbits.LATC1 = 0;
-LATCbits.LATC2 = 0;
-LATCbits.LATC3 = 1;
+LATCbits.LATC2 = 1;
+LATCbits.LATC3 = 0;
 LATCbits.LATC4 = 0;
 LATCbits.LATC5 = 0;
 LATCbits.LATC6 = 1;
@@ -5293,9 +5292,10 @@ LATCbits.LATC7 = 0;
 leftturnstep = 1;
 lturncount++;
 }
-PIR1bits.TMR1IF = 0;
-TMR1H = rmotorstephigh;
-TMR1L = rmotorsteplow;
+PIR2bits.TMR3IF = 0;
+T3CONbits.TMR3ON = 1;
+TMR3H = rmotorstephigh;
+TMR3L = rmotorsteplow;
 }
 }
 

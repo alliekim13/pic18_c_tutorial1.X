@@ -5138,7 +5138,9 @@ uint8_t lmotorstephigh;
 uint8_t lmotorsteplow;
 uint8_t rmotorstephigh;
 uint8_t rmotorsteplow;
-unsigned int adc;
+unsigned int rightadc;
+unsigned int leftadc;
+unsigned int middleadc;
 int lstep;
 int rstep;
 int rstepcount;
@@ -5158,8 +5160,9 @@ unsigned int has_right_wall;
 unsigned int has_front_wall;
 unsigned int step_count;
 unsigned int prev_adc;
+unsigned int adc;
 
-# 62
+# 65
 void high_priority interrupt high_isr(void);
 
 
@@ -5177,7 +5180,14 @@ void delay(unsigned int ms)
 _delay((unsigned long)((1)*(32000000/4000.0)));
 }
 
-
+void scan_sensors(void)
+{ while(ADCON0bits.DONE);
+middleadc = adc_convert(0);
+while(ADCON0bits.DONE);
+leftadc = adc_convert(1);
+while(ADCON0bits.DONE);
+rightadc = adc_convert(2);
+}
 
 void main(void)
 {
@@ -5188,8 +5198,8 @@ OSCTUNE = 0b01001111;
 
 ConfigureOscillator();
 
-# 94
-TRISA = 0b00000001;
+# 104
+TRISA = 0b00000111;
 TRISC = 0b00000000;
 TRISB = 0b00000000;
 TRISD = 0b00000000;
@@ -5198,16 +5208,6 @@ TRISD = 0b00000000;
 
 
 LATC = 0b00000000;
-
-lstep = 1;
-rstep = 1;
-leftturnstep = 1;
-ustep = 1;
-forward = 0;
-lturn = 1;
-rstepcount = 0;
-lstepcount = 0;
-lturncount = 0;
 
 
 ADCON0bits.CHS = 0b0000;
@@ -5245,14 +5245,30 @@ T1CONbits.TMR1CS = 0;
 PIR1bits.TMR1IF = 0;
 PIE1bits.TMR1IE = 1;
 
+lstep = 1;
+rstep = 1;
+leftturnstep = 1;
+ustep = 1;
+forward = 1;
+lturn = 0;
+rstepcount = 0;
+lstepcount = 0;
+lturncount = 0;
+
 T1CONbits.TMR1ON = 1;
 T3CONbits.TMR3ON = 1;
 
+lmotorstephigh = 0b00111111;
+lmotorsteplow = 0b11110000;
+
+rmotorstephigh = 0b00111111;
+rmotorsteplow = 0b11111111;
+
+
 while(1)
 {
+scan_sensors();
 
-
+# 187
 }
-
 }
-

@@ -26,7 +26,9 @@ uint8_t lmotorstephigh; // timer preloader values
 uint8_t lmotorsteplow;
 uint8_t rmotorstephigh;
 uint8_t rmotorsteplow;
-unsigned int adc;       // ADC reading
+unsigned int leftadc;       // ADC reading
+unsigned int rightadc;       // ADC reading
+unsigned int middleadc;       // ADC reading
 int lstep;              // motor step count of left motor
 int rstep;              // motor step count of right motor
 int rstepcount;
@@ -35,7 +37,7 @@ int lturn;
 int lturncount;
 unsigned int ustep;
 unsigned int rightturnstep;     //
-unsigned int leftturnstep;
+unsigned int lturnstep;
 unsigned int rightstep;
 unsigned int forward;
 unsigned int right;
@@ -44,7 +46,6 @@ unsigned int uturn;
 unsigned int has_left_wall; // Boolean variable for wall presence
 unsigned int has_right_wall;
 unsigned int has_front_wall;
-unsigned int step_count;
 unsigned int prev_adc;  
 
 /******************************************************************************/
@@ -64,12 +65,10 @@ void high_isr(void)
 void high_priority interrupt high_isr(void)
 {
 
-    if (PIR2bits.TMR3IF && forward && lstepcount < 500)
+    if (PIR2bits.TMR3IF && forward && lstepcount < 1000)
     {   // set speed at which motor steps
-    lmotorstephigh = 0b00111111;
-    lmotorsteplow = 0b11110000;
 
-    // step left motor once 1320 forward
+    // step left motor once 1230 forward
     if (lstep == 1)
         {   LATCbits.LATC3 = 0;
             LATCbits.LATC1 = 1;
@@ -78,15 +77,15 @@ void high_priority interrupt high_isr(void)
             lstep++;
         }
     else if (lstep == 2)
-        {   LATCbits.LATC3 = 1;
-            LATCbits.LATC2 = 0;
+        {   LATCbits.LATC3 = 0;
+            LATCbits.LATC2 = 1;
             LATCbits.LATC0 = 0;
             LATCbits.LATC1 = 0;
             lstep++;
         }
     else if (lstep == 3)
-        {   LATCbits.LATC3 = 0;
-            LATCbits.LATC2 = 1;
+        {   LATCbits.LATC3 = 1;
+            LATCbits.LATC2 = 0;
             LATCbits.LATC1 = 0;
             LATCbits.LATC0 = 0;
             lstep++;
@@ -109,10 +108,9 @@ void high_priority interrupt high_isr(void)
     }  
 
     // step right motor once
-    if (PIR1bits.TMR1IF && forward && rstepcount < 500)
+    if (PIR1bits.TMR1IF && forward && rstepcount < 1000)
     {   // set speed at which motor steps (temporary)
-        rmotorstephigh = 0b00111111;
-        rmotorsteplow = 0b11110000;
+        // forward 4765
 
         // step right motor once
         if (rstep == 1)
@@ -153,9 +151,9 @@ void high_priority interrupt high_isr(void)
     }
 
     // if we are turning around
-    if (PIR2bits.TMR3IF && lstepcount < 60 && lturn)
+    if (PIR2bits.TMR3IF && lturn && lturncount < uturn)
     {
-        if (leftturnstep == 1)
+        if (lturnstep == 1)
         {   LATCbits.LATC0 = 1;
             LATCbits.LATC1 = 0;
             LATCbits.LATC2 = 0;
@@ -164,31 +162,31 @@ void high_priority interrupt high_isr(void)
             LATCbits.LATC5 = 0;
             LATCbits.LATC6 = 0;
             LATCbits.LATC7 = 0;
-            leftturnstep++;
+            lturnstep++;
         }
-        else if (leftturnstep == 2)
-        {   LATCbits.LATC0 = 0;
-            LATCbits.LATC1 = 0;
-            LATCbits.LATC2 = 1;
-            LATCbits.LATC3 = 0;
-            LATCbits.LATC4 = 0;
-            LATCbits.LATC5 = 0;
-            LATCbits.LATC6 = 0;
-            LATCbits.LATC7 = 1;
-            leftturnstep++;
-        }
-        else if (leftturnstep == 3)
+        else if (lturnstep == 2)
         {   LATCbits.LATC0 = 0;
             LATCbits.LATC1 = 0;
             LATCbits.LATC2 = 0;
             LATCbits.LATC3 = 1;
             LATCbits.LATC4 = 0;
             LATCbits.LATC5 = 0;
+            LATCbits.LATC6 = 0;
+            LATCbits.LATC7 = 1;
+            lturnstep++;
+        }
+        else if (lturnstep == 3)
+        {   LATCbits.LATC0 = 0;
+            LATCbits.LATC1 = 0;
+            LATCbits.LATC2 = 1;
+            LATCbits.LATC3 = 0;
+            LATCbits.LATC4 = 0;
+            LATCbits.LATC5 = 0;
             LATCbits.LATC6 = 1;
             LATCbits.LATC7 = 0;
-            leftturnstep++;
+            lturnstep++;
         }
-        else if (leftturnstep == 4)
+        else if (lturnstep == 4)
         {   LATCbits.LATC0 = 0;
             LATCbits.LATC1 = 1;
             LATCbits.LATC2 = 0;
@@ -197,7 +195,7 @@ void high_priority interrupt high_isr(void)
             LATCbits.LATC5 = 1;
             LATCbits.LATC6 = 0;
             LATCbits.LATC7 = 0;  
-            leftturnstep = 1;
+            lturnstep = 1;
             lturncount++;
         }
     PIR2bits.TMR3IF = 0;       // turn timer 1 interrupt flag off

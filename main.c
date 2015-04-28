@@ -33,7 +33,9 @@ uint8_t lmotorstephigh; // timer preloader values
 uint8_t lmotorsteplow;
 uint8_t rmotorstephigh;
 uint8_t rmotorsteplow;
-unsigned int adc;       // ADC reading
+unsigned int rightadc;       // ADC reading values
+unsigned int leftadc;
+unsigned int middleadc;
 int lstep;              // motor step count of left motor
 int rstep;              // motor step count of right motor
 int rstepcount;
@@ -42,18 +44,17 @@ int lturn;
 int lturncount;
 unsigned int ustep;
 unsigned int rightturnstep;     //
-unsigned int leftturnstep;
+unsigned int lturnstep;
 unsigned int rightstep;
 unsigned int forward;
 unsigned int right;
 unsigned int left;
 unsigned int uturn;
-unsigned int has_left_wall; // Boolean variable for wall presence
-unsigned int has_right_wall;
-unsigned int has_front_wall;
-unsigned int step_count;
-unsigned int prev_adc;  
-
+unsigned int left_wall; // Boolean variable for wall presence
+unsigned int right_wall;
+unsigned int front_wall;
+unsigned int prev_adc;
+unsigned int adc;
 /* i.e. uint8_t <variable_name>; j*/
 // make mouse take a certain number of steps
 /******************************************************************************/
@@ -76,7 +77,15 @@ void delay(unsigned int ms)
         __delay_ms(1);
 }  
 
-          
+void scan_sensors(void)
+{   while(ADCON0bits.DONE); // wait for conversion to finish
+    middleadc = adc_convert(0);   // get analog reading from channel 0
+    while(ADCON0bits.DONE);
+    leftadc = adc_convert(1);
+    while(ADCON0bits.DONE);
+    rightadc = adc_convert(2);
+}
+
 
 void main(void)
 {   //int delay_time = 1000;
@@ -91,7 +100,7 @@ void main(void)
     //InitApp();
 
     /* TODO <INSERT USER APPLICATION CODE HERE> */
-    TRISA = 0b00000001;
+    TRISA = 0b00000111;
     TRISC = 0b00000000;
     TRISB = 0b00000000;
     TRISD = 0b00000000;
@@ -100,17 +109,7 @@ void main(void)
 
     // set initial conditions for stepping motors
     LATC = 0b00000000;  // set initial values of all output ports
-    
-    lstep = 1;          // set step increment for motors
-    rstep = 1;
-    leftturnstep = 1;
-    ustep = 1;
-    forward = 0;        // set initial state to forward
-    lturn = 1;
-    rstepcount = 0;
-    lstepcount = 0;
-    lturncount = 0;
-
+    LATD = 0b10000000;
 
     ADCON0bits.CHS = 0b0000;    // select output channel
     ADCON0bits.GO = 0;          // A/D conversion initially idle
@@ -147,14 +146,48 @@ void main(void)
     PIR1bits.TMR1IF = 0;    // turn off timer 1 interrupt flag
     PIE1bits.TMR1IE = 1;    // enable timer 1 interrupt
 
+    lstep = 1;          // set step increment for motors
+    rstep = 1;
+    lturnstep = 1;
+    ustep = 1;
+    forward = 1;        // set initial state to forward
+    lturn = 0;
+    rstepcount = 0;
+    lstepcount = 0;
+    lturncount = 0;
+
     T1CONbits.TMR1ON = 1;   // turn timers for stepping motors on
     T3CONbits.TMR3ON = 1;
 
-    while(1)
-    {    
-        //while(ADCON0bits.DONE); // wait for conversion to finish
-        //adc = adc_convert(0);   // get analog reading from channel 0
-    } 
-    
-}
+    lmotorstephigh = 0b00111111;
+    lmotorsteplow = 0b11110000;
 
+    rmotorstephigh = 0b00111111;
+    rmotorsteplow = 0b11111111;
+
+
+    while(1)
+    {   
+        //scan_sensors();
+       /* if (middleadc > 800)
+        {   forward = 0;
+            lturn = 1;
+            leftturnstep = 1;
+            uturn = 100;
+        }  */
+   // detect presence of wall
+    /*if (middleadc > 500)
+    {   forward = 0;
+        lturn = 1;
+        leftturnstep = 1;
+        uturn = 200;
+        PORTDbits.RD6 = 1;
+    }*/
+    
+     /*   if (leftadc < 85)
+        {   PORTDbits.RD6 = 1;  }  */
+
+        //if (rightadc < 42)
+        //{   PORTDbits.RD5 =1;   }
+}
+}
